@@ -11,7 +11,7 @@ namespace Tests
         {
             var director = new AircraftDirector();
             var builder = new PassengerPlaneBuilder();
-            director.Builder = builder;
+            director.SetBuilder(builder);
             director.ConstructRegionalPassengerPlane();
             var aircraft = builder.Build();
             Assert.NotNull(aircraft);
@@ -23,7 +23,7 @@ namespace Tests
         public void Builder_Throws_On_Null_Engine()
         {
             var builder = new PassengerPlaneBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.SetEngine(null));
+            Assert.Throws<ArgumentNullException>(() => builder.SetEngine(null!));
         }
 
         [Fact]

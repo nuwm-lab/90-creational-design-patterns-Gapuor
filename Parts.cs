@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace LabWork
 {
-    public class Engine
+    public sealed class Engine
     {
         public string Model { get; }
         public int Thrust { get; }
@@ -20,24 +20,24 @@ namespace LabWork
         public override string ToString() => $"{Model} ({Thrust} kN)";
     }
 
-    public class Wings
+    public sealed class Wings
     {
-        public string Type { get; }
+        public string WingType { get; }
         public double Span { get; }
 
-        public Wings(string type, double span)
+        public Wings(string wingType, double span)
         {
-            if (string.IsNullOrWhiteSpace(type)) throw new ArgumentException("Wings type must be a non-empty string.", nameof(type));
+            if (string.IsNullOrWhiteSpace(wingType)) throw new ArgumentException("Wings type must be a non-empty string.", nameof(wingType));
             if (span <= 0) throw new ArgumentOutOfRangeException(nameof(span), "Span must be positive.");
 
-            Type = type;
+            WingType = wingType;
             Span = span;
         }
 
-        public override string ToString() => $"{Type}, span {Span.ToString("F1", CultureInfo.InvariantCulture)} m";
+        public override string ToString() => $"{WingType}, span {Span.ToString("F1", CultureInfo.InvariantCulture)} m";
     }
 
-    public class Interior
+    public sealed class Interior
     {
         public string Style { get; }
         public int Seats { get; }

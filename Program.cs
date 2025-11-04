@@ -14,30 +14,38 @@ namespace LabWork
         /// </summary>
         static void Main(string[] args)
         {
-            // Демонстрація використання патерну Builder для проєктування літаків
-            var director = new AircraftDirector();
+            try
+            {
+                // Демонстрація використання патерну Builder для проєктування літаків
+                var director = new AircraftDirector();
 
-            var passengerBuilder = new PassengerPlaneBuilder();
-            director.Builder = passengerBuilder;
+                var passengerBuilder = new PassengerPlaneBuilder();
+                director.SetBuilder(passengerBuilder);
 
-            // Побудувати регіональний пасажирський літак
-            director.ConstructRegionalPassengerPlane();
-            var regional = passengerBuilder.Build();
-            Console.WriteLine(regional);
+                // Побудувати регіональний пасажирський літак
+                director.ConstructRegionalPassengerPlane();
+                var regional = passengerBuilder.Build();
+                Console.WriteLine(regional);
 
-            // Побудувати довго-габаритний пасажирський літак
-            director.ConstructLongHaulPassengerPlane();
-            var longHaul = passengerBuilder.Build();
-            Console.WriteLine(longHaul);
+                // Побудувати довго-габаритний пасажирський літак
+                director.ConstructLongHaulPassengerPlane();
+                var longHaul = passengerBuilder.Build();
+                Console.WriteLine(longHaul);
 
-            // Побудувати вантажний літак через власний builder
-            var cargoBuilder = new CargoPlaneBuilder();
-            director.Builder = cargoBuilder;
-            director.ConstructHeavyCargoPlane();
-            var cargo = cargoBuilder.Build();
-            Console.WriteLine(cargo);
+                // Побудувати вантажний літак через власний builder
+                var cargoBuilder = new CargoPlaneBuilder();
+                director.SetBuilder(cargoBuilder);
+                director.ConstructHeavyCargoPlane();
+                var cargo = cargoBuilder.Build();
+                Console.WriteLine(cargo);
 
-            Console.WriteLine("Builder demo completed.");
+                Console.WriteLine("Builder demo completed.");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex);
+                Environment.Exit(1);
+            }
         }
     }
 }

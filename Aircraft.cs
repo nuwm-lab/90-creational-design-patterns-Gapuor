@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace LabWork
 {
@@ -9,9 +11,9 @@ namespace LabWork
     /// </summary>
     public class Aircraft
     {
-        private Engine _engine;
-        private Wings _wings;
-        private Interior _interior;
+    private Engine? _engine;
+    private Wings? _wings;
+    private Interior? _interior;
 
         internal void SetEngine(Engine engine)
         {
@@ -61,6 +63,23 @@ namespace LabWork
             sb.AppendLine($" Wings: {_wings}");
             sb.AppendLine($" Interior: {_interior}");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns a JSON representation of the aircraft (read-only snapshot).
+        /// </summary>
+        public string ToJson()
+        {
+            Validate();
+
+            var dto = new
+            {
+                Engine = new { Model = _engine!.Model, Thrust = _engine!.Thrust },
+                Wings = new { Type = _wings!.WingType, Span = _wings!.Span },
+                Interior = new { Style = _interior!.Style, Seats = _interior!.Seats }
+            };
+
+            return JsonSerializer.Serialize(dto, new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }

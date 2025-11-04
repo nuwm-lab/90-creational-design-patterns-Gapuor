@@ -2,9 +2,9 @@ using System;
 
 namespace LabWork
 {
-    public class PassengerPlaneBuilder : IAircraftBuilder
+    public sealed class PassengerPlaneBuilder : IAircraftBuilder
     {
-        private Aircraft _aircraft;
+    private Aircraft _aircraft = null!;
 
         public PassengerPlaneBuilder()
         {
