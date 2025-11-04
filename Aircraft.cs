@@ -9,29 +9,27 @@ namespace LabWork
     /// Product class that represents a constructed aircraft.
     /// Parts are encapsulated and can only be set by builders in the same assembly.
     /// </summary>
-    public class Aircraft
+    public sealed class Aircraft
     {
-    private Engine? _engine;
-    private Wings? _wings;
-    private Interior? _interior;
+        private readonly Engine _engine;
+        private readonly Wings _wings;
+        private readonly Interior _interior;
 
-        internal void SetEngine(Engine engine)
+        /// <summary>
+        /// Creates a new Aircraft with all required parts.
+        /// Internal to ensure only builders in this assembly can create instances.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown when any part is null.</exception>
+        internal Aircraft(Engine engine, Wings wings, Interior interior)
         {
             _engine = engine ?? throw new ArgumentNullException(nameof(engine));
-        }
-
-        internal void SetWings(Wings wings)
-        {
             _wings = wings ?? throw new ArgumentNullException(nameof(wings));
-        }
-
-        internal void SetInterior(Interior interior)
-        {
             _interior = interior ?? throw new ArgumentNullException(nameof(interior));
         }
 
-        internal void Validate()
+        private void Validate()
         {
+            // Since constructor validates, this should never happen unless reflection is used
             if (_engine is null)
             {
                 throw new InvalidOperationException("Aircraft missing engine.");

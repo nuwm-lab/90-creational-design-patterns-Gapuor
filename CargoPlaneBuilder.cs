@@ -7,41 +7,40 @@ namespace LabWork
     /// </summary>
     public sealed class CargoPlaneBuilder : IAircraftBuilder
     {
-    private Aircraft _aircraft = new Aircraft();
-
-        public CargoPlaneBuilder()
-        {
-            Reset();
-        }
+        private Engine? _engine;
+        private Wings? _wings;
+        private Interior? _interior;
 
         public void Reset()
         {
-            _aircraft = new Aircraft();
+            _engine = null;
+            _wings = null;
+            _interior = null;
         }
 
         public void SetEngine(Engine engine)
         {
-            if (engine is null) throw new ArgumentNullException(nameof(engine));
-            _aircraft.SetEngine(engine);
+            _engine = engine ?? throw new ArgumentNullException(nameof(engine));
         }
 
         public void SetWings(Wings wings)
         {
-            if (wings is null) throw new ArgumentNullException(nameof(wings));
-            _aircraft.SetWings(wings);
+            _wings = wings ?? throw new ArgumentNullException(nameof(wings));
         }
 
         public void SetInterior(Interior interior)
         {
-            if (interior is null) throw new ArgumentNullException(nameof(interior));
+            _interior = interior ?? throw new ArgumentNullException(nameof(interior));
             // Cargo planes may have a utilitarian interior; still store it
-            _aircraft.SetInterior(interior);
         }
 
         public Aircraft Build()
         {
-            _aircraft.Validate();
-            var result = _aircraft;
+            if (_engine is null) throw new InvalidOperationException("Aircraft missing engine.");
+            if (_wings is null) throw new InvalidOperationException("Aircraft missing wings.");
+            if (_interior is null) throw new InvalidOperationException("Aircraft missing interior.");
+
+            var result = new Aircraft(_engine, _wings, _interior);
             Reset();
             return result;
         }
