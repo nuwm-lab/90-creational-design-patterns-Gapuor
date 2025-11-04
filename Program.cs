@@ -44,7 +44,8 @@ namespace LabWork
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex);
-                Environment.Exit(1);
+                Environment.ExitCode = 1;
+                return;
             }
         }
     }
