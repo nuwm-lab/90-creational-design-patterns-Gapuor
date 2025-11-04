@@ -46,8 +46,15 @@ namespace LabWork
             }
         }
 
+        /// <summary>
+        /// Returns a human-readable description of the aircraft.
+        /// This method validates the built state and will throw if parts are missing.
+        /// </summary>
         public override string ToString()
         {
+            // Protect against accidental use of incomplete product
+            Validate();
+
             var sb = new StringBuilder();
             sb.AppendLine("Aircraft configuration:");
             sb.AppendLine($" Engine: {_engine}");

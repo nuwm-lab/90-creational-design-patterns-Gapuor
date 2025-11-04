@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace LabWork
 {
@@ -16,10 +17,7 @@ namespace LabWork
             Thrust = thrust;
         }
 
-        public override string ToString()
-        {
-            return $"{Model} ({Thrust} kN)";
-        }
+        public override string ToString() => $"{Model} ({Thrust} kN)";
     }
 
     public class Wings
@@ -36,10 +34,7 @@ namespace LabWork
             Span = span;
         }
 
-        public override string ToString()
-        {
-            return $"{Type}, span {Span} m";
-        }
+        public override string ToString() => $"{Type}, span {Span.ToString("F1", CultureInfo.InvariantCulture)} m";
     }
 
     public class Interior
@@ -56,9 +51,6 @@ namespace LabWork
             Seats = seats;
         }
 
-        public override string ToString()
-        {
-            return $"{Style}, {Seats} seats";
-        }
+        public override string ToString() => $"{Style}, {Seats} seats";
     }
 }

@@ -7,7 +7,7 @@ namespace LabWork
     // Необхідно змінювати і дописувати код лише в цьому проекті
     // Відео-інструкції щодо роботи з github можна переглянути 
     // за посиланням https://www.youtube.com/@ViktorZhukovskyy/videos 
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// Entry point - demonstrates Builder pattern by creating several aircraft.
