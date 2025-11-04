@@ -11,8 +11,30 @@ namespace LabWork
     {
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("Hello World!");
+            // Демонстрація використання патерну Builder для проєктування літаків
+            var director = new AircraftDirector();
+
+            var passengerBuilder = new PassengerPlaneBuilder();
+            director.Builder = passengerBuilder;
+
+            // Побудувати регіональний пасажирський літак
+            director.ConstructRegionalPassengerPlane();
+            Aircraft regional = passengerBuilder.Build();
+            System.Console.WriteLine(regional);
+
+            // Побудувати довго-габаритний пасажирський літак
+            director.ConstructLongHaulPassengerPlane();
+            Aircraft longHaul = passengerBuilder.Build();
+            System.Console.WriteLine(longHaul);
+
+            // Побудувати вантажний літак через власний builder
+            var cargoBuilder = new CargoPlaneBuilder();
+            director.Builder = cargoBuilder;
+            director.ConstructHeavyCargoPlane();
+            Aircraft cargo = cargoBuilder.Build();
+            System.Console.WriteLine(cargo);
+
+            System.Console.WriteLine("Builder demo completed.");
         }
     }
 }
