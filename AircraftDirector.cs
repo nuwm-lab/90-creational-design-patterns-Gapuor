@@ -8,11 +8,21 @@ namespace LabWork
         private IAircraftBuilder _builder;
 
         /// <summary>
-        /// Set the builder to use by the director.
+        /// The builder used by the director. Use the setter or <see cref="SetBuilder"/> to assign.
         /// </summary>
         public IAircraftBuilder Builder
         {
+            get => _builder;
             set => _builder = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        /// <summary>
+        /// Explicitly sets the builder with a clearer API call and performs null validation.
+        /// </summary>
+        /// <param name="builder">The builder to use.</param>
+        public void SetBuilder(IAircraftBuilder builder)
+        {
+            Builder = builder; // setter performs null-check
         }
 
         public void ConstructRegionalPassengerPlane()
