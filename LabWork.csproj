@@ -5,4 +5,9 @@
   <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
+  <!-- Exclude test sources that live under Tests/ from the main project build -->
+  <ItemGroup>
+    <Compile Remove="Tests\**\*.cs" />
+  </ItemGroup>
+
 </Project>

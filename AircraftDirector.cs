@@ -5,13 +5,17 @@ namespace LabWork
     {
         private IAircraftBuilder _builder;
 
+        /// <summary>
+        /// Set the builder to use by the director.
+        /// </summary>
         public IAircraftBuilder Builder
         {
-            set { _builder = value; }
+            set => _builder = value ?? throw new System.ArgumentNullException(nameof(value));
         }
 
         public void ConstructRegionalPassengerPlane()
         {
+            EnsureBuilder();
             // a typical regional passenger configuration
             _builder.Reset();
             _builder.SetEngine(new Engine("TurboFan X200", 120));
@@ -21,6 +25,7 @@ namespace LabWork
 
         public void ConstructLongHaulPassengerPlane()
         {
+            EnsureBuilder();
             _builder.Reset();
             _builder.SetEngine(new Engine("TurboFan Z900", 300));
             _builder.SetWings(new Wings("Sweep", 60.0));
@@ -29,10 +34,16 @@ namespace LabWork
 
         public void ConstructHeavyCargoPlane()
         {
+            EnsureBuilder();
             _builder.Reset();
             _builder.SetEngine(new Engine("Turboprop H700", 180));
             _builder.SetWings(new Wings("Straight - reinforced", 40.0));
             _builder.SetInterior(new Interior("Utility", 4));
+        }
+
+        private void EnsureBuilder()
+        {
+            if (_builder is null) throw new System.InvalidOperationException("Builder not set on Director.");
         }
     }
 }

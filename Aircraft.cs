@@ -1,8 +1,12 @@
+using System;
 using System.Text;
 
 namespace LabWork
 {
-    // Product class: Aircraft with encapsulated parts
+    /// <summary>
+    /// Product class that represents a constructed aircraft.
+    /// Parts are encapsulated and can only be set by builders in the same assembly.
+    /// </summary>
     public class Aircraft
     {
         private Engine _engine;
@@ -11,17 +15,35 @@ namespace LabWork
 
         internal void SetEngine(Engine engine)
         {
-            _engine = engine;
+            _engine = engine ?? throw new ArgumentNullException(nameof(engine));
         }
 
         internal void SetWings(Wings wings)
         {
-            _wings = wings;
+            _wings = wings ?? throw new ArgumentNullException(nameof(wings));
         }
 
         internal void SetInterior(Interior interior)
         {
-            _interior = interior;
+            _interior = interior ?? throw new ArgumentNullException(nameof(interior));
+        }
+
+        internal void Validate()
+        {
+            if (_engine is null)
+            {
+                throw new InvalidOperationException("Aircraft missing engine.");
+            }
+
+            if (_wings is null)
+            {
+                throw new InvalidOperationException("Aircraft missing wings.");
+            }
+
+            if (_interior is null)
+            {
+                throw new InvalidOperationException("Aircraft missing interior.");
+            }
         }
 
         public override string ToString()
