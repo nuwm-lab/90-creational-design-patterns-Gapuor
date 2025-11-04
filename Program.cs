@@ -23,21 +23,21 @@ namespace LabWork
             // Побудувати регіональний пасажирський літак
             director.ConstructRegionalPassengerPlane();
             var regional = passengerBuilder.Build();
-            System.Console.WriteLine(regional);
+            Console.WriteLine(regional);
 
             // Побудувати довго-габаритний пасажирський літак
             director.ConstructLongHaulPassengerPlane();
             var longHaul = passengerBuilder.Build();
-            System.Console.WriteLine(longHaul);
+            Console.WriteLine(longHaul);
 
             // Побудувати вантажний літак через власний builder
             var cargoBuilder = new CargoPlaneBuilder();
             director.Builder = cargoBuilder;
             director.ConstructHeavyCargoPlane();
             var cargo = cargoBuilder.Build();
-            System.Console.WriteLine(cargo);
+            Console.WriteLine(cargo);
 
-            System.Console.WriteLine("Builder demo completed.");
+            Console.WriteLine("Builder demo completed.");
         }
     }
 }

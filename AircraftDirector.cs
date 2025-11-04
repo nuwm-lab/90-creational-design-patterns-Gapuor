@@ -1,3 +1,5 @@
+using System;
+
 namespace LabWork
 {
     // Director orchestrates builder steps for common configurations
@@ -10,7 +12,7 @@ namespace LabWork
         /// </summary>
         public IAircraftBuilder Builder
         {
-            set => _builder = value ?? throw new System.ArgumentNullException(nameof(value));
+            set => _builder = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public void ConstructRegionalPassengerPlane()
@@ -43,7 +45,7 @@ namespace LabWork
 
         private void EnsureBuilder()
         {
-            if (_builder is null) throw new System.InvalidOperationException("Builder not set on Director.");
+            if (_builder is null) throw new InvalidOperationException("Builder not set on Director.");
         }
     }
 }
