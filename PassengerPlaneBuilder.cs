@@ -2,9 +2,12 @@ using System;
 
 namespace LabWork
 {
+    /// <summary>
+    /// Concrete builder for passenger aircraft.
+    /// </summary>
     public sealed class PassengerPlaneBuilder : IAircraftBuilder
     {
-    private Aircraft _aircraft = null!;
+    private Aircraft _aircraft = new Aircraft();
 
         public PassengerPlaneBuilder()
         {

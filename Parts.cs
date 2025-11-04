@@ -3,6 +3,10 @@ using System.Globalization;
 
 namespace LabWork
 {
+    /// <summary>
+    /// Represents an aircraft engine (model and thrust in kN).
+    /// Immutable once constructed.
+    /// </summary>
     public sealed class Engine
     {
         public string Model { get; }
@@ -20,6 +24,9 @@ namespace LabWork
         public override string ToString() => $"{Model} ({Thrust} kN)";
     }
 
+    /// <summary>
+    /// Represents aircraft wings with a descriptive type and span in meters.
+    /// </summary>
     public sealed class Wings
     {
         public string WingType { get; }
@@ -37,6 +44,9 @@ namespace LabWork
         public override string ToString() => $"{WingType}, span {Span.ToString("F1", CultureInfo.InvariantCulture)} m";
     }
 
+    /// <summary>
+    /// Represents the interior configuration (style and passenger/crew seats).
+    /// </summary>
     public sealed class Interior
     {
         public string Style { get; }

@@ -41,12 +41,25 @@ namespace LabWork
 
                 Console.WriteLine("Builder demo completed.");
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
-                Console.Error.WriteLine(ex);
+                // Argument problems indicate programming or input errors; report and exit with non-zero code.
+                Console.Error.WriteLine($"{ex.GetType().Name}: {ex.Message}");
+                Console.Error.WriteLine(ex.StackTrace);
                 Environment.ExitCode = 1;
                 return;
             }
+            catch (InvalidOperationException ex)
+            {
+                // Validation / state errors produced by builders or product validation.
+                Console.Error.WriteLine($"{ex.GetType().Name}: {ex.Message}");
+                Console.Error.WriteLine(ex.StackTrace);
+                Environment.ExitCode = 1;
+                return;
+            }
+            // Note: we intentionally do not swallow all exceptions here. Unexpected exceptions should surface
+            // so they can be observed during development and handled appropriately in production with
+            // a proper logging/monitoring solution.
         }
     }
 }

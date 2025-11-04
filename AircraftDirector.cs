@@ -8,19 +8,19 @@ namespace LabWork
     /// </summary>
     public class AircraftDirector
     {
-        private IAircraftBuilder _builder = null!;
+    private IAircraftBuilder? _builder;
 
-        // Magic strings centralized for easier maintenance
-        private static readonly string TurboFanX200 = "TurboFan X200";
-        private static readonly string TurboFanZ900 = "TurboFan Z900";
-        private static readonly string TurbopropH700 = "Turboprop H700";
+    // Magic strings centralized for easier maintenance
+    private const string TurboFanX200 = "TurboFan X200";
+    private const string TurboFanZ900 = "TurboFan Z900";
+    private const string TurbopropH700 = "Turboprop H700";
 
         /// <summary>
         /// The builder used by the director. External code should call <see cref="SetBuilder"/> to assign.
         /// </summary>
         public IAircraftBuilder Builder
         {
-            get => _builder;
+            get => _builder ?? throw new InvalidOperationException("Builder not set on Director.");
             private set => _builder = value ?? throw new ArgumentNullException(nameof(value));
         }
 
@@ -72,7 +72,7 @@ namespace LabWork
 
         private void EnsureBuilder()
         {
-            if (Builder is null) throw new InvalidOperationException("Builder not set on Director.");
+            if (_builder is null) throw new InvalidOperationException("Builder not set on Director.");
         }
     }
 }
